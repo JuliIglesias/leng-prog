@@ -3,7 +3,7 @@
 --import Data.Foldable (for_)
 import Test.Hspec    (describe, hspec, it, shouldBe)
 
-import Example (help, hello, obliqueShot)
+import Example (hello, obliqueShot)
 
 main :: IO ()
 main = hspec $ do

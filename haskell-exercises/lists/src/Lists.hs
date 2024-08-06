@@ -19,10 +19,16 @@ union (x:xs) ys
 -- Remove Implementations, from, here on
 
 intersection:: [Int] -> [Int] -> [Int]
-intersection = error "Implement it"
+intersection [] ys = []
+intersection (x:xs) ys
+  | member x ys = x : intersection xs ys
+  | otherwise = intersection xs ys
 
 difference:: [Int] -> [Int] -> [Int]
-difference  = error "Implement it"
+difference xs [] = xs
+difference (x:xs) ys
+  | member x ys = difference xs ys
+  | otherwise = x : difference xs ys
 
 insert:: Int -> [Int] -> [Int]
 insert = error "Implement it"
@@ -37,7 +43,7 @@ toDecimal :: Int -> [Int] -> Int
 toDecimal = error "Implement it"
     
 toDec::Int -> String -> Int
-toDec base s =  = error "Implement it"
+toDec base s =  error "Implement it"
 
 -- Same as `toDec` But use a list comprehension
 
