@@ -1,6 +1,7 @@
 module Lists (member, union, intersection, difference,
               insert, insertionSort,
               binaryToDecimal, toDecimal, toDec, decimal,
+              firsts,
               binaryAdd) where
   
 import Data.Char(digitToInt)  
@@ -25,33 +26,43 @@ intersection (x:xs) ys
   | otherwise = intersection xs ys
 
 difference:: [Int] -> [Int] -> [Int]
-difference xs [] = xs
+difference [] ys = [] -- no entiendo porque no se puede poner al reves pero funca
 difference (x:xs) ys
   | member x ys = difference xs ys
   | otherwise = x : difference xs ys
 
 insert:: Int -> [Int] -> [Int]
-insert = error "Implement it"
+insert a [] = [a]
+insert a (x:xs)
+  | a <= x = a : x : xs
+  | otherwise = x : insert a xs
 
+--se podria hacer con foldr o foldl
 insertionSort :: [Int] -> [Int]
-insertionSort = error "Implement it"
+insertionSort [] = []
+insertionSort (x:xs) = insert x (insertionSort xs)
 
 binaryToDecimal :: [Int] -> Int
-binaryToDecimal = error "Implement it"
+binaryToDecimal [] = 0
+binaryToDecimal (x:xs) = x * 2 ^ length xs + binaryToDecimal xs
     
 toDecimal :: Int -> [Int] -> Int
-toDecimal = error "Implement it"
+toDecimal base [] = 0
+toDecimal base (x:xs) = x * base ^ length xs + toDecimal base xs
     
 toDec::Int -> String -> Int
-toDec base s =  error "Implement it"
+toDec base s = toDecimal base (map digitToInt s)
 
 -- Same as `toDec` But use a list comprehension
 
 decimal::Int -> String -> Int
-decimal  = error "Implement it"
+decimal base s = sum [digitToInt x * base ^ i | (x, i) <- zip s [length s - 1, length s - 2..0]]
 
+--Given a List, return a Nested List containing:
+--The first element, the first 2 elements, the first 3 elements, etc.
 firsts::[a] -> [[a]]
-firsts = error "Implement it"
+firsts [] = []
+firsts xs = [take i xs | i <- [1.. (length xs)]]
 
 -- Given two String that represents numbers in binary implement the 'binaryAdd' function
 -- DO NOT USE a predefined '+' operation
