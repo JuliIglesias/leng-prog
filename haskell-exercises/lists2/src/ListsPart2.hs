@@ -18,5 +18,16 @@ bits str = concat [charToBits c | c <- str]
 
 type Solution = [Int]
 
+-- el ROW se va sumando hasta coincidir con el n+1
+-- el COL es un alista con la columna q usa
+-- Diagonal es row - col
+-- AntiDiagonal es row + col
+
+--Necesitamos: recursion entre soluciones y el tablero
 queens::Int -> [Solution]
-queens error "Implement It"
+queens n = solve 1 [[]]
+  where solve row solutions
+  | row > n = solutions
+  | otherwise = solve (row+1) [col:solution | col <- [1..n], solution <- solutions, ok col 1 solution]
+  ok _ _ [] = True
+  ok col offset (c:cs) = col /= c && col /= c-offset && col/= c + offset && ok col (offset+1) cs

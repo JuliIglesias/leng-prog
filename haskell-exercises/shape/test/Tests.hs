@@ -35,5 +35,5 @@ main = hspec $ do
     it "shift" $ do
       shift c01 (1.0, 2.0) `shouldBe` Circle Point {x = 1.0, y = 2.0} 1.0
     it "surface" $ do
-      surface c01 `shouldBe` pi  
+      surface c01 `shouldBe` pi
     
