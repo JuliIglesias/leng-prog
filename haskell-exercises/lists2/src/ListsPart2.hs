@@ -10,11 +10,11 @@ bitAt :: Int -> Char -> Bit
 bitAt n c = if testBit (ord c) (7-n) then T else F 
 
 charToBits :: Char -> Bits
-charToBits = error "Implement It"
-
+charToBits char = [bitAt n char | n <- [0..7]]
 
 bits::String -> Bits
-bits = error "Implement It"
+bits str = concat [charToBits c | c <- str]
+
 
 type Solution = [Int]
 
